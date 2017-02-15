@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import ListaSimplePalabras.LSPalabras;
 import java.io.File;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -22,7 +23,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
      * Creates new form MenuPrincipal
      */
     //************* VARIABLES GLOBALES
-    XMLParser mihandler;
+    XMLParser  mihandler = new XMLParser();
+    public static LSPalabras lsp = new LSPalabras();
     //************* FIN VARIABLES GLOBALES
 
     public MenuPrincipal() {
@@ -57,7 +59,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnJugar.setBackground(new java.awt.Color(255, 204, 204));
         btnJugar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
         btnJugar.setText("JUGAR");
-        btnJugar.setEnabled(false);
         btnJugar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnJugarActionPerformed(evt);
@@ -95,7 +96,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
         // TODO add your handling code here:
-
+        mihandler.lsp.Graficar();
     }//GEN-LAST:event_btnJugarActionPerformed
 
     //********* METODOS 
@@ -119,11 +120,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             //se instancia un handler que se ha declaro de manera global para que exista en todo el codigo de esta clase
-            mihandler = new XMLParser();
+           
             //se parsea el xml
             saxParser.parse(inputFile, mihandler);
-            //ahora nuestro xml ya esta parseado y se encuentra en la variable "mihandler"4
-
+            //ahora nuestro xml ya esta parseado y se encuentra en la variable "mihandler"
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage());
             e.printStackTrace();
