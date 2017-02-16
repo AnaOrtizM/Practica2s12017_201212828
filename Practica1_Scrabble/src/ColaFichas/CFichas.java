@@ -81,4 +81,33 @@ public class CFichas {
 
         g.graficar("CFichas", grafo);
     }
+    
+    public void Fichas(){
+        String ficha[] = new String[25];
+        ficha[0] = "A";
+        ficha[1] = "B";
+        ficha[2] = "C";
+        ficha[3] = "D";
+        ficha[4] = "E";
+        ficha[5] = "F";
+        ficha[6] = "G";
+        ficha[7] = "H";
+        ficha[8] = "I";
+        ficha[9] = "J";
+        ficha[10] = "L";
+        ficha[11] = "M";
+        ficha[12] = "N";
+        ficha[13] = "Ñ";
+        ficha[14] = "O";
+        ficha[15] = "P";
+        ficha[16] = "Q";
+        ficha[17] = "R";
+        ficha[18] = "S";
+        ficha[19] = "T";
+        ficha[20] = "U";
+        ficha[21] = "V";
+        ficha[22] = "X";
+        ficha[23] = "Y";
+        ficha[24] = "Z";                
+    }
 }
