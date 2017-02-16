@@ -10,5 +10,28 @@ package ColaFichas;
  * @author ana_j
  */
 public class NodoCF {
-    
+
+    private NodoCF siguiente;
+    private String ficha;
+
+    public NodoCF(String ficha, NodoCF siguiente) {
+        this.siguiente = siguiente;
+        this.ficha = ficha;
+    }
+
+    public void setSiguiente(NodoCF siguiente) {
+        this.siguiente = siguiente;
+    }
+
+    public void setFicha(String ficha) {
+        this.ficha = ficha;
+    }
+
+    public NodoCF getSiguiente() {
+        return siguiente;
+    }
+
+    public String getFicha() {
+        return ficha;
+    }
 }

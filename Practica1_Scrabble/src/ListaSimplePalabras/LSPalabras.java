@@ -15,7 +15,7 @@ public class LSPalabras {
 
     private NodoLSP inicio;
     private NodoLSP fin;
-    
+
     Graficador g = new Graficador();
 
     public LSPalabras() {
@@ -79,8 +79,7 @@ public class LSPalabras {
         }
         grafo += "}  labelloc=\"t\"; label=\" LISTA SIMPLE PALABRAS\";}";
         System.out.println(grafo);
-        
+
         g.graficar("LSPalabras", grafo);
     }
-
 }

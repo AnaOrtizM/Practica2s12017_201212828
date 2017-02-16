@@ -39,11 +39,11 @@ public class LCJugadores {
             inicio = actual;
             fin = actual;
             fin.setSiguiente(inicio);
-        } else {
+        } else if (!Buscar(usuario)) {
             actual = new NodoLCJ(usuario, null);
             fin.setSiguiente(actual);
             actual.setSiguiente(inicio);
-            fin = actual;
+            fin = actual;   
         }
     }
 
@@ -58,6 +58,23 @@ public class LCJugadores {
                 temp = temp.getSiguiente();
             } while (temp != inicio);
         }
+    }
+
+    public boolean Buscar(String usuario) {
+        NodoLCJ temp;
+        if (estaVacia()) {
+            System.out.println("Lista de Jugadores Vacia");
+        } else {
+            temp = inicio;
+            do {
+                if (temp.getUsuario().equals(usuario)) {
+                    System.out.println("El usuario " + temp.getUsuario() + " está repetido!");
+                    return true;
+                }
+                temp = temp.getSiguiente();
+            } while (temp != inicio);
+        }
+        return false;
     }
 
     public void Graficar() {
