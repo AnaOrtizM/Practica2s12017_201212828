@@ -30,7 +30,7 @@ public class LSPalabras {
         }
     }
 
-    public void insertarFinal(Diccionario palabra) {
+    public void insertarFinal(String palabra) {
 
         NodoLSP actual;
 
@@ -52,7 +52,7 @@ public class LSPalabras {
         } else {
             temp = inicio;
             while (temp != null) {
-                System.out.println(temp.getPalabra().toString());
+                System.out.println(temp.getPalabra());
                 temp = temp.getSiguiente();
             }
         }

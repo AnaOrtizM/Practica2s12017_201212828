@@ -12,9 +12,9 @@ package ListaSimplePalabras;
 public class NodoLSP {
 
     private NodoLSP siguiente;
-    private Diccionario palabra;
+    private String palabra;
 
-    public NodoLSP(Diccionario palabra, NodoLSP siguiente) {
+    public NodoLSP(String palabra, NodoLSP siguiente) {
         this.siguiente = siguiente;
         this.palabra = palabra;
     }
@@ -23,7 +23,7 @@ public class NodoLSP {
         this.siguiente = siguiente;
     }
 
-    public void setPalabra(Diccionario palabra) {
+    public void setPalabra(String palabra) {
         this.palabra = palabra;
     }
 
@@ -31,7 +31,7 @@ public class NodoLSP {
         return siguiente;
     }
 
-    public Diccionario getPalabra() {
+    public String getPalabra() {
         return palabra;
     }
 }

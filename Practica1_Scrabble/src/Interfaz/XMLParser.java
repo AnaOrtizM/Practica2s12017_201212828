@@ -17,7 +17,7 @@ import org.xml.sax.helpers.DefaultHandler;
 public class XMLParser extends DefaultHandler {
 
     boolean bpalabra = false;
-    LSPalabras lsp = MenuPrincipal.lsp;
+    LSPalabras lsp = JFMenuPrincipal.lsp;
 
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
@@ -45,7 +45,7 @@ public class XMLParser extends DefaultHandler {
         if (bpalabra) {
             System.out.println("--- " + new String(ch, start, length));
             //********* insertar en la estructura *********//           
-            lsp.insertarFinal(new Diccionario(new String(ch, start, length)));
+            lsp.insertarFinal(new String(ch, start, length));
             bpalabra = false;
         }
        // lsp.Mostrar();
