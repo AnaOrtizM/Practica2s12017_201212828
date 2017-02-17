@@ -6,6 +6,7 @@
 package ColaFichas;
 
 import Utils.Graficador;
+import java.util.Random;
 
 /**
  *
@@ -45,8 +46,54 @@ public class CFichas {
         }
     }
 
-    public void Mostrar() {
+    public String Pop() {
+
+        NodoCF actual;
+
+        if(!estaVacia()){
+            actual = inicio;
+            inicio = inicio.getSiguiente();
+            if(estaVacia()){
+                fin = null;
+            }
+            return actual.getFicha();
+        }
+        return null;
+        /*if (!estaVacia()) {
+            actual = inicio;
+            inicio = inicio.getSiguiente();
+            Pop(actual.getFicha());
+            if (estaVacia()) {
+                fin = null;
+            }
+        }*/
+    }
+    
+       /* public void Pop(String ficha) {
         NodoCF temp;
+        NodoCF anterior;
+
+        temp = inicio;
+        anterior = null;
+
+        while (temp != null) {
+            if (ficha.equals(temp.getFicha())) {
+                if (temp == inicio) {
+                    inicio = inicio.getSiguiente();
+                } else {
+                    anterior.setSiguiente(temp);
+                }
+            }
+            System.out.println(temp.getFicha());
+            anterior = temp;
+            temp = temp.getSiguiente();
+        }
+    }*/
+
+    public void Mostrar() {
+
+        NodoCF temp;
+
         if (estaVacia()) {
             System.out.println("Cola de Fichas Vacia");
         } else {
@@ -81,33 +128,45 @@ public class CFichas {
 
         g.graficar("CFichas", grafo);
     }
-    
-    public void Fichas(){
-        String ficha[] = new String[25];
-        ficha[0] = "A";
-        ficha[1] = "B";
-        ficha[2] = "C";
-        ficha[3] = "D";
-        ficha[4] = "E";
-        ficha[5] = "F";
-        ficha[6] = "G";
-        ficha[7] = "H";
-        ficha[8] = "I";
-        ficha[9] = "J";
-        ficha[10] = "L";
-        ficha[11] = "M";
-        ficha[12] = "N";
-        ficha[13] = "Ñ";
-        ficha[14] = "O";
-        ficha[15] = "P";
-        ficha[16] = "Q";
-        ficha[17] = "R";
-        ficha[18] = "S";
-        ficha[19] = "T";
-        ficha[20] = "U";
-        ficha[21] = "V";
-        ficha[22] = "X";
-        ficha[23] = "Y";
-        ficha[24] = "Z";                
+
+    public void Fichas() {
+        Letra ficha[] = new Letra[25];
+        ficha[0] = new Letra("A", 12);
+        ficha[1] = new Letra("B", 2);
+        ficha[2] = new Letra("C", 4);
+        ficha[3] = new Letra("D", 5);
+        ficha[4] = new Letra("E", 12);
+        ficha[5] = new Letra("F", 1);
+        ficha[6] = new Letra("G", 2);
+        ficha[7] = new Letra("H", 2);
+        ficha[8] = new Letra("I", 6);
+        ficha[9] = new Letra("J", 1);
+        ficha[10] = new Letra("L", 4);
+        ficha[11] = new Letra("M", 2);
+        ficha[12] = new Letra("N", 5);
+        ficha[13] = new Letra("Ñ", 1);
+        ficha[14] = new Letra("O", 9);
+        ficha[15] = new Letra("P", 2);
+        ficha[16] = new Letra("Q", 1);
+        ficha[17] = new Letra("R", 5);
+        ficha[18] = new Letra("S", 6);
+        ficha[19] = new Letra("T", 4);
+        ficha[20] = new Letra("U", 5);
+        ficha[21] = new Letra("V", 1);
+        ficha[22] = new Letra("X", 1);
+        ficha[23] = new Letra("Y", 1);
+        ficha[24] = new Letra("Z", 1);
+
+        int limite = 95;
+        Random rnd = new Random();
+
+        while (limite > 0) {
+            int numero = (int) (rnd.nextDouble() * 5);
+            if (ficha[numero].cantidad > 0) {
+                System.out.println(ficha[numero].letra + "--" + ficha[numero].cantidad);
+                ficha[numero].cantidad--;
+                limite--;
+            }
+        }
     }
 }

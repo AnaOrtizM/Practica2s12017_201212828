@@ -31,7 +31,6 @@ public class LSMano {
     }
 
     public void insertarFinal(String fichaM) {
-
         NodoLSM actual;
 
         if (estaVacia()) {
@@ -45,6 +44,66 @@ public class LSMano {
         }
     }
 
+    public void Buscar(String fichaM) {
+        NodoLSM temp;
+        if (estaVacia()) {
+            System.out.println("Lista de Mano Vacia");
+        } else {
+            temp = inicio;
+            while (temp != null) {
+                if (fichaM.equals(temp.getFichaM())) {
+                    System.out.println(temp.getFichaM());
+                    break;
+                }
+
+                temp = temp.getSiguiente();
+            }
+        }
+    }
+
+    public String Extraer(int posicion) {
+        NodoLSM temp;
+        String actual = null;
+        temp = inicio;
+
+        if (posicion == 0) {
+            actual = inicio.getFichaM();
+            inicio = inicio.getSiguiente();
+        } else {
+            for (int i = 0; i < 7; i++) {
+                if (i == posicion - 1) {
+                    actual = temp.getSiguiente().getFichaM();
+                    temp.setSiguiente(temp.getSiguiente().getSiguiente());
+                }
+                temp = temp.getSiguiente();
+            }
+        }
+        if(inicio == null){
+            fin = null;
+        }
+        return actual;
+    }
+
+    /*    public void Eliminar(String fichaM) {
+        NodoLSM temp;
+        NodoLSM anterior;
+
+        temp = inicio;
+        anterior = null;
+
+        while (temp != null) {
+            if (fichaM.equals(temp.getFichaM())) {
+                if (temp == inicio) {
+                    inicio = inicio.getSiguiente();
+                } else {
+                    anterior.setSiguiente(temp);
+                }
+            }
+            System.out.println(temp.getFichaM());
+            anterior = temp;
+            temp = temp.getSiguiente();
+        }
+    }*/
     public void Mostrar() {
         NodoLSM temp;
         if (estaVacia()) {
@@ -61,7 +120,7 @@ public class LSMano {
     public void Graficar() {
         String grafo;
         NodoLSM temp;
-        grafo = "digraph g {  node [shape = record,height=.1];  { \n";
+        grafo = "digraph g {  node [shape = doublecircle,height=.1];  { \n";
         if (estaVacia()) {
             grafo += "\"ListaVacia\" [label = \"Lista Vacia\"]";
         } else {
