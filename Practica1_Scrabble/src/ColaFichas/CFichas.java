@@ -164,6 +164,7 @@ public class CFichas {
             int numero = (int) (rnd.nextDouble() * 5);
             if (ficha[numero].cantidad > 0) {
                 System.out.println(ficha[numero].letra + "--" + ficha[numero].cantidad);
+                Push(ficha[numero].letra);
                 ficha[numero].cantidad--;
                 limite--;
             }

@@ -5,10 +5,16 @@
  */
 package Interfaz;
 
+import Utils.XMLParser;
 import ListaSimplePalabras.LSPalabras;
 import java.io.File;
+import java.net.URL;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -23,13 +29,30 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
      * Creates new form JFMenuPrincipal
      */
     //************* VARIABLES GLOBALES
-    XMLParser  mihandler = new XMLParser();
+    XMLParser mihandler = new XMLParser();
     public static LSPalabras lsp = new LSPalabras();
     JFIngresoJugadores ingreso = new JFIngresoJugadores();
     //************* FIN VARIABLES GLOBALES
 
     public JFMenuPrincipal() {
         initComponents();
+
+        /**
+         * ******** Cambiar la imagen del icono *********
+         */
+        URL url = getClass().getResource("/Imagenes/icon.jpg");
+        ImageIcon img = new ImageIcon(url);
+        setIconImage(img.getImage());
+
+        /**
+         * ******** Colocar una imagen de fondo *********
+         */
+        ((JPanel) getContentPane()).setOpaque(false);
+        ImageIcon uno = new ImageIcon(this.getClass().getResource("/Imagenes/fondo.jpg"));
+        JLabel fondo = new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
 
     /**
@@ -43,14 +66,13 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
 
         btnLeer = new javax.swing.JButton();
         btnJugar = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Menú Principal");
         setBackground(new java.awt.Color(204, 153, 255));
 
         btnLeer.setBackground(new java.awt.Color(255, 204, 204));
-        btnLeer.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnLeer.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnLeer.setText("LEER ARCHIVO");
         btnLeer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +81,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
         });
 
         btnJugar.setBackground(new java.awt.Color(255, 204, 204));
-        btnJugar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnJugar.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         btnJugar.setText("JUGAR");
         btnJugar.setEnabled(false);
         btnJugar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,41 +90,29 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Graficar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
-                .addComponent(btnLeer, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE)
-                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(161, 161, 161)
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(174, 174, 174)
+                .addComponent(btnLeer)
+                .addGap(111, 111, 111)
+                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(74, 74, 74)
+                .addGap(117, 117, 117)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnLeer, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
-                .addContainerGap(38, Short.MAX_VALUE))
+                    .addComponent(btnLeer, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(109, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLeerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLeerActionPerformed
@@ -113,12 +123,8 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
         // TODO add your handling code here:
         ingreso.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_btnJugarActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        mihandler.lsp.Graficar();
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     //********* METODOS 
     private void abrirArchivoXML() {
@@ -142,7 +148,7 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
             SAXParserFactory factory = SAXParserFactory.newInstance();
             SAXParser saxParser = factory.newSAXParser();
             //se instancia un handler que se ha declaro de manera global para que exista en todo el codigo de esta clase
-           
+
             //se parsea el xml
             saxParser.parse(inputFile, mihandler);
             //ahora nuestro xml ya esta parseado y se encuentra en la variable "mihandler"
@@ -192,6 +198,5 @@ public class JFMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnJugar;
     private javax.swing.JButton btnLeer;
-    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }

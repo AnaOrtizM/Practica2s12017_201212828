@@ -8,6 +8,12 @@ package Interfaz;
 import ColaFichas.CFichas;
 import ListaCircularJugadores.LCJugadores;
 import ListaSimpleMano.LSMano;
+import java.net.URL;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 /**
  *
@@ -18,13 +24,31 @@ public class JFIngresoJugadores extends javax.swing.JFrame {
     /**
      * Creates new form JFIngresoJugadores
      */
-    
+    JFTablero jft = new JFTablero();
+
     LCJugadores lcj = new LCJugadores();
     CFichas cf = new CFichas();
     LSMano lsm = new LSMano();
-    
+
     public JFIngresoJugadores() {
         initComponents();
+
+        /**
+         * ******** Cambiar la imagen del icono *********
+         */
+        URL url = getClass().getResource("/Imagenes/icon.jpg");
+        ImageIcon img = new ImageIcon(url);
+        setIconImage(img.getImage());
+
+        /**
+         * ******** Colocar una imagen de fondo *********
+         */
+        ((JPanel) getContentPane()).setOpaque(false);
+        ImageIcon uno = new ImageIcon(this.getClass().getResource("/Imagenes/users.jpg"));
+        JLabel fondo = new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
 
     /**
@@ -42,17 +66,21 @@ public class JFIngresoJugadores extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
+        btnIniciarJuego = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ingreso de Jugadores");
+        setBackground(new java.awt.Color(204, 255, 153));
+        setPreferredSize(new java.awt.Dimension(857, 317));
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 51, 102));
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setText("Nombre de Usuario:");
 
-        txtNombreUsuario.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        txtNombreUsuario.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
-        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        btnAgregar.setBackground(new java.awt.Color(153, 153, 255));
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        btnAgregar.setForeground(new java.awt.Color(0, 0, 51));
         btnAgregar.setText("AGREGAR");
         btnAgregar.setMaximumSize(new java.awt.Dimension(115, 25));
         btnAgregar.setMinimumSize(new java.awt.Dimension(115, 25));
@@ -77,69 +105,81 @@ public class JFIngresoJugadores extends javax.swing.JFrame {
             }
         });
 
+        btnIniciarJuego.setBackground(new java.awt.Color(0, 153, 153));
+        btnIniciarJuego.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnIniciarJuego.setText("INICIAR");
+        btnIniciarJuego.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIniciarJuegoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(159, 159, 159)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnIniciarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(26, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton2)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1))))
+                        .addGap(25, 25, 25)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(79, 79, 79)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(8, 8, 8)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton2)
+                            .addComponent(jButton1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(txtNombreUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(18, 18, 18)
+                .addComponent(btnIniciarJuego, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(78, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
-        /*lcj.Insertar(txtNombreUsuario.getText());
+        lcj.Insertar(txtNombreUsuario.getText());
         txtNombreUsuario.setText("");
-        lcj.Mostrar();*/
-        /*cf.Push(txtNombreUsuario.getText());
+        lcj.Mostrar();
+ /*cf.Push(txtNombreUsuario.getText());
         txtNombreUsuario.setText("");
         cf.Mostrar();*/
-        lsm.insertarFinal(txtNombreUsuario.getText());
+       /* lsm.insertarFinal(txtNombreUsuario.getText());
         txtNombreUsuario.setText("");
-        lsm.Mostrar();
+        lsm.Mostrar();*/
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        //lcj.Graficar();
-        lsm.Graficar();
+        lcj.Graficar();
+       // lsm.Graficar();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -150,6 +190,17 @@ public class JFIngresoJugadores extends javax.swing.JFrame {
         lsm.Extraer(pos);
         lsm.Mostrar();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnIniciarJuegoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarJuegoActionPerformed
+        // TODO add your handling code here:
+        if (lcj.estaVacia()) {
+            JOptionPane.showMessageDialog(null, "No hay usuario ingresado");
+        } else {
+            jft.iniciarJuego();
+            jft.setVisible(true);
+            this.setVisible(false);
+        }
+    }//GEN-LAST:event_btnIniciarJuegoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -188,6 +239,7 @@ public class JFIngresoJugadores extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnIniciarJuego;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
