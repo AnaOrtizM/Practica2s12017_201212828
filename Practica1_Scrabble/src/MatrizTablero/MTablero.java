@@ -5,6 +5,7 @@
  */
 package MatrizTablero;
 
+import Utils.Graficador;
 import javax.swing.JPanel;
 
 /**
@@ -16,6 +17,8 @@ public class MTablero {
     private NodoMT raiz;
     private int x;
     private int y;
+    
+    Graficador g = new Graficador();
 
     public MTablero(int tamx, int tamy) {
         this.x = tamx;
@@ -126,5 +129,46 @@ public class MTablero {
                 panel.add(nodo.lbl);
             }
         }
+    }
+
+    public void Graficar() {
+        String grafo;
+        NodoMT temp;
+        grafo = "digraph g {  node [shape = box,height=.1];  { \n";
+        if (raiz.abajo == null) {
+            grafo += "\"MatrizVacia\" [label = \"Matriz Vacia\"]";
+        } else {
+            temp = raiz.abajo;
+            int i = 0;
+            int j = 0;
+            while (temp != null) {
+                grafo += "\"" + i + j + "\" [label = \"" + x + y + "\"];\n";
+                if (temp.abajo != null) {
+                    grafo += "\"" + i + "\" -> \"" + (i + 1) + "\" ;\n";
+                }
+                temp = temp.abajo;
+                i++;
+            }
+        }
+
+        if (raiz.derecha == null) {
+            grafo += "\"MatrizVacia\" [label = \"Matriz Vacia\"]";
+        } else {
+            temp = raiz.derecha;
+            int i = 0;
+            int j = 0;
+            while (temp != null) {
+                grafo += "\"" + i + j + "\" [label = \"" + x + y + "\"];\n";
+                if (temp.derecha != null) {
+                    grafo += "\"" + j + "\" -> \"" + (j + 1) + "\" ;\n";
+                }
+                temp = temp.derecha;
+                j++;
+            }
+        }
+        grafo += "}  labelloc=\"t\"; label=\" MATRIZ ORTOGONAL TABLERO\";}";
+        System.out.println(grafo);
+
+        g.graficar("MTablero", grafo);
     }
 }

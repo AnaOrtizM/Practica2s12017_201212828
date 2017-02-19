@@ -16,7 +16,7 @@ import javax.swing.border.LineBorder;
  */
 public class Ficha {
 
-    public static final Integer TAM_FICHA = 40;
+    public static final Integer TAM_FICHA = 30;
 
     String letra;
     MiJLabel labelFicha;
