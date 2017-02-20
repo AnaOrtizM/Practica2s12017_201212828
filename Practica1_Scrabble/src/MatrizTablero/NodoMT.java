@@ -23,7 +23,10 @@ public class NodoMT {
     public NodoMT izquierda;
     public NodoMT derecha;
     private Ficha ficha;
+
     public int tipo;
+    public int posicionX;
+    public int posicionY;
 
     JLabel lbl = new JLabel();
 
@@ -32,6 +35,8 @@ public class NodoMT {
     }
 
     public NodoMT(int posx, int posy) {
+        this.posicionX = posx;
+        this.posicionY = posy;
         this.lbl = new JLabel("");
         this.lbl.setBounds(posx * TAM_FICHA, posy * TAM_FICHA, TAM_FICHA, TAM_FICHA);
         this.lbl.setFont(new Font("Tahoma", 1, 10)); // NOI18N
@@ -52,8 +57,20 @@ public class NodoMT {
         this.tipo = tipo;
         if (tipo == 1) {
             this.lbl.setBackground(Color.red);
-        } else if (tipo == 2){
+        } else if (tipo == 2) {
             this.lbl.setBackground(Color.blue);
         }
+    }
+
+    public String getContenido() {
+        if (this.ficha == null) {
+            return "" + this.posicionX + "," + this.posicionY;
+        } else {
+            return this.ficha.getLetra();
+        }
+    }
+    
+    public String getPosicionString(){
+        return "" + this.posicionX + "," + this.posicionY; 
     }
 }

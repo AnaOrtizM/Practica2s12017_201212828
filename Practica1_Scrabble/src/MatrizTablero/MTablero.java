@@ -17,7 +17,7 @@ public class MTablero {
     private NodoMT raiz;
     private int x;
     private int y;
-    
+
     Graficador g = new Graficador();
 
     public MTablero(int tamx, int tamy) {
@@ -131,10 +131,140 @@ public class MTablero {
         }
     }
 
+    public void graficarMatriz() {
+        String grafo;
+        NodoMT tempX = this.raiz;
+        NodoMT tempY = this.raiz;
+
+        grafo = "digraph G {\n"
+                + "rankdir = TB;\n"
+                + "rank = min;\n"
+                + "node[style=filled,shape=box, label=\"Inicio\", rankdir=UD];\n";
+
+        for (int j = 0; j < y; j++) {
+            for (int i = 0; i < x; i++) {
+                grafo += "\"" + i + "," + j + "\"[label=\"" + tempX.getContenido() + "\", style=filled];\n";
+                tempX = tempX.derecha;
+            }
+            tempY = tempY.abajo;
+            tempX = tempY;
+        }
+
+        for (int j = 0; j < y; j++) {
+            for (int i = 0; i < (x-1); i++) {
+                grafo += "\"" + i + "," + j + "\" -> \"" + (i + 1) + "," + j + "\"[constraint=false];\n";
+                grafo += "\"" + (i + 1) + "," + j + "\" -> \"" + i + "," + j + "\"[constraint=false];\n";
+                grafo += "{rank=same;\"" + i + "," + j + "\" \"" + (i + 1) + "," + j + "\"}\n";
+                grafo += "{rank=same;\"" + (i + 1) + "," + j + "\" \"" + i + "," + j + "\"}\n";
+            }
+        }
+
+        for (int i = 0; i < y; i++) {
+            for (int j = 0; j < (x-1); j++) {
+                grafo += "\"" + i + "," + j + "\" -> \"" + i + "," + (j + 1) + "\"[rankdir=UD];\n";
+                grafo += "\"" + i + "," + (j + 1) + "\" -> \"" + i + "," + j + "\"[rankdir=UD];\n";
+            }
+        }
+        
+        grafo += "labelloc=\"t\"; label=\" MATRIZ ORTOGONAL TABLERO\";}";
+        System.out.println(grafo);
+
+        g.graficar("MTablero", grafo);
+    }
+
+    public void graficarMatrizSinUnParDeLineas() {
+
+        String grafo;
+        NodoMT tempX;
+        NodoMT tempY;
+
+        grafo = "digraph G {\n"
+                + "graph [splines=ortho, nodesep=0.5];\n"
+                + "style=filled;\n"
+                + "color=lightgrey;\n"
+                + "node[style=filled,shape=box];\n"
+                + "ranksep=.75; ";
+
+        grafo += "\"" + this.raiz.getPosicionString() + "\" [label=\"" + this.raiz.getContenido() + "\"];";
+
+        /*grafo += "subgraph cluster0{ node[shape = record];\n"
+                + "rankdir=\"TB\";\n"
+                + "node[group=a];";*/
+        tempX = this.raiz;
+        tempY = this.raiz;
+
+        for (int i = 1; i < y; i++) {
+            tempY = tempY.abajo;
+
+            grafo += "\"" + "0" + "," + (i - 1) + "\" -> \"" + "0" + "," + i + "\" ;\n";
+            grafo += "\"" + "0" + "," + i + "\" -> \"" + "0" + "," + (i - 1) + "\" ;\n";
+
+            grafo += "\"" + tempY.getPosicionString() + "\" [style=filled,label=\"" + tempY.getContenido() + "\",shape=box];";
+        }
+
+        /* grafo += "edge[style=invis];\n"
+                + "}";*/
+        /**
+         * ***
+         */
+        /* grafo += "{ rank=same;\n"
+                + "\"0,0\";";*/
+        for (int i = 1; i < x; i++) {
+            tempX = tempX.derecha;
+
+            grafo += "\"" + (i - 1) + "," + "0" + "\" -> \"" + i + "," + "0" + "\" ;\n";
+            grafo += "\"" + i + "," + "0" + "\" -> \"" + (i - 1) + "," + "0" + "\" ;\n";
+
+            grafo += "\"" + tempX.getPosicionString() + "\" [style=filled,label=\"" + tempX.getContenido() + "\",shape=box];";
+        }
+
+        // grafo += "}";
+        /**
+         * ****
+         */
+        /**
+         * *****************
+         */
+        tempX = this.raiz;
+
+        for (int j = 1; j < x; j++) {
+            tempX = tempX.derecha;
+            tempY = tempX;
+
+            /*      grafo += "{\n"
+                    + " node [shape = record];\n"
+                    + " rankdir=TB;\n"
+                    + " node[group=a];";*/
+            for (int i = 1; i < y; i++) {
+                tempY = tempY.abajo;
+
+                grafo += "\"" + j + "," + (i - 1) + "\" -> \"" + j + "," + i + "\" ;\n";
+                grafo += "\"" + j + "," + i + "\" -> \"" + j + "," + (i - 1) + "\" ;\n";
+
+                grafo += "\"" + (j - 1) + "," + i + "\" -> \"" + j + "," + i + "\" ;\n";
+                grafo += "\"" + j + "," + i + "\" -> \"" + (j - 1) + "," + i + "\" ;\n";
+
+                grafo += "\"" + tempY.getPosicionString() + "\" [style=filled,label=\"" + tempY.getContenido() + "\",shape=box];";
+            }
+            /*   grafo += "edge[style=invis];\n"
+                    + "}";*/
+
+        }
+        /**
+         * *****************
+         */
+
+        grafo += "}  labelloc=\"t\"; label=\" MATRIZ ORTOGONAL TABLERO\";}";
+        System.out.println(grafo);
+
+        g.graficar("MTablero", grafo);
+    }
+
     public void Graficar() {
         String grafo;
         NodoMT temp;
         grafo = "digraph g {  node [shape = box,height=.1];  { \n";
+
         if (raiz.abajo == null) {
             grafo += "\"MatrizVacia\" [label = \"Matriz Vacia\"]";
         } else {
@@ -158,7 +288,7 @@ public class MTablero {
             int i = 0;
             int j = 0;
             while (temp != null) {
-                grafo += "\"" + i + j + "\" [label = \"" + x + y + "\"];\n";
+                grafo += "\"" + i + j + "\" [label = \"" + x + "," + y + "\"];\n";
                 if (temp.derecha != null) {
                     grafo += "\"" + j + "\" -> \"" + (j + 1) + "\" ;\n";
                 }
