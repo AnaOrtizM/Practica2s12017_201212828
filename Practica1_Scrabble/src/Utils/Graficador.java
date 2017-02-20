@@ -10,8 +10,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -80,7 +78,7 @@ public class Graficador {
         //Se crea el grafo
         crearGrafo(ruta_dot, ruta_png);
         //Se abre la imagen
-        autoAbrir(ruta_png);
+        //autoAbrir(ruta_png);
     }
 
     //Este metodo es generico

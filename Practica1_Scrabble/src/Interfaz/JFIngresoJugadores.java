@@ -168,6 +168,7 @@ public class JFIngresoJugadores extends javax.swing.JFrame {
         lcj.Insertar(txtNombreUsuario.getText());
         txtNombreUsuario.setText("");
         lcj.Mostrar();
+        lcj.Graficar();
  /*cf.Push(txtNombreUsuario.getText());
         txtNombreUsuario.setText("");
         cf.Mostrar();*/
