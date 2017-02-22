@@ -260,7 +260,7 @@ public class MTablero {
         g.graficar("MTablero", grafo);
     }
 
-    public void Graficar() {
+  /*  public void Graficar() {
         String grafo;
         NodoMT temp;
         grafo = "digraph g {  node [shape = box,height=.1];  { \n";
@@ -301,5 +301,5 @@ public class MTablero {
         System.out.println(grafo);
 
         g.graficar("MTablero", grafo);
-    }
+    }*/
 }

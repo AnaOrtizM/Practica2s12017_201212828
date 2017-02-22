@@ -147,6 +147,8 @@ public class JFTablero extends javax.swing.JFrame {
         lblRFichas = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
         lblRMano = new javax.swing.JLabel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        lblRMatriz = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -231,6 +233,11 @@ public class JFTablero extends javax.swing.JFrame {
         jScrollPane4.setViewportView(lblRMano);
 
         jTabbedPane1.addTab("Lista Mano", jScrollPane4);
+
+        lblRMatriz.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jScrollPane5.setViewportView(lblRMatriz);
+
+        jTabbedPane1.addTab("Matriz Tablero", jScrollPane5);
 
         jMenu1.setText("Ayuda");
 
@@ -387,6 +394,16 @@ public class JFTablero extends javax.swing.JFrame {
                             }
                         }
                         break;
+                    case 4:
+                        matriz.graficarMatriz();
+                         {
+                            try {
+                                lblRMatriz.setIcon(new ImageIcon(ImageIO.read(new File(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "MTablero.png"))));
+                            } catch (IOException ex) {
+                                Logger.getLogger(JFTablero.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
                 }
             }
         };
@@ -445,10 +462,12 @@ public class JFTablero extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblRFichas;
     private javax.swing.JLabel lblRJugadores;
     private javax.swing.JLabel lblRMano;
+    private javax.swing.JLabel lblRMatriz;
     private javax.swing.JLabel lblRPalabras;
     private javax.swing.JTextField txtPalabraNueva;
     // End of variables declaration//GEN-END:variables
