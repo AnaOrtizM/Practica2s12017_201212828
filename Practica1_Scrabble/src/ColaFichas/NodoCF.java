@@ -5,6 +5,8 @@
  */
 package ColaFichas;
 
+import MatrizTablero.Ficha;
+
 /**
  *
  * @author ana_j
@@ -12,9 +14,9 @@ package ColaFichas;
 public class NodoCF {
 
     private NodoCF siguiente;
-    private String ficha;
+    private Ficha ficha;
 
-    public NodoCF(String ficha, NodoCF siguiente) {
+    public NodoCF(Ficha ficha, NodoCF siguiente) {
         this.siguiente = siguiente;
         this.ficha = ficha;
     }
@@ -23,7 +25,7 @@ public class NodoCF {
         this.siguiente = siguiente;
     }
 
-    public void setFicha(String ficha) {
+    public void setFicha(Ficha ficha) {
         this.ficha = ficha;
     }
 
@@ -31,7 +33,7 @@ public class NodoCF {
         return siguiente;
     }
 
-    public String getFicha() {
+    public Ficha getFicha() {
         return ficha;
     }
 }

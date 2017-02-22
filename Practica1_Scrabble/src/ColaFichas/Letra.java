@@ -13,9 +13,11 @@ public class Letra {
 
     public String letra;
     public int cantidad;
+    public int puntos;
 
-    public Letra(String letra, int cantidad) {
+    public Letra(String letra, int cantidad, int puntos) {
         this.letra = letra;
         this.cantidad = cantidad;
+        this.puntos = puntos;
     }
 }

@@ -14,11 +14,21 @@ import MatrizTablero.MTablero;
 import Utils.XMLParser;
 import java.awt.Color;
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.JTabbedPane;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 
@@ -87,10 +97,6 @@ public class JFTablero extends javax.swing.JFrame {
         pintarFichasJugador();
         matriz.pintarTablero(paneltablero);
         this.add(paneltablero);
-
-        cfichas.Graficar();
-        matriz.graficarMatriz();
-
     }
 
     public void pintarFichasJugador() {
@@ -102,7 +108,6 @@ public class JFTablero extends javax.swing.JFrame {
         }
 
         lsmano.pintarFichasTablero(paneltablero);
-        lsmano.Graficar();
     }
 
     public void masFichasJugador() {
@@ -114,7 +119,6 @@ public class JFTablero extends javax.swing.JFrame {
         }
         lsmano.pintarFichasTablero(paneltablero);
         paneltablero.repaint();
-        lsmano.Graficar();
     }
 
     /**
@@ -126,25 +130,23 @@ public class JFTablero extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        btnMostrarReportes = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtPalabraNueva = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanelReporte1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        lblReporte2 = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        lblReporte3 = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
-        lblReporte4 = new javax.swing.JLabel();
-        jPanel5 = new javax.swing.JPanel();
-        lblReporte5 = new javax.swing.JLabel();
         btnValidarTiro = new javax.swing.JButton();
         btnPedirFichas = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lblRPalabras = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        lblRJugadores = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        lblRFichas = new javax.swing.JLabel();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        lblRMano = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -153,31 +155,33 @@ public class JFTablero extends javax.swing.JFrame {
         setTitle("SCRABBLE");
         setExtendedState(6);
 
-        jButton1.setText("GRAFICAR MATRIZ");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnMostrarReportes.setBackground(new java.awt.Color(255, 153, 153));
+        btnMostrarReportes.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnMostrarReportes.setText("MOSTRAR REPORTES");
+        btnMostrarReportes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnMostrarReportesActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 204));
         jLabel1.setText("TURNO:");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 204));
         jLabel2.setText("PUNTUACIÓN:");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 204));
         jLabel3.setText("NUEVA PALABRA");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtPalabraNueva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        txtPalabraNueva.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
 
-        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnAgregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnAgregar.setText("AGREGAR");
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -185,97 +189,7 @@ public class JFTablero extends javax.swing.JFrame {
             }
         });
 
-        jTabbedPane1.setName(""); // NOI18N
-        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jTabbedPane1StateChanged(evt);
-            }
-        });
-        jTabbedPane1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTabbedPane1MouseClicked(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanelReporte1Layout = new javax.swing.GroupLayout(jPanelReporte1);
-        jPanelReporte1.setLayout(jPanelReporte1Layout);
-        jPanelReporte1Layout.setHorizontalGroup(
-            jPanelReporte1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
-        );
-        jPanelReporte1Layout.setVerticalGroup(
-            jPanelReporte1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 372, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Reporte 1: Jugadores", jPanelReporte1);
-
-        lblReporte2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblReporte2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte2, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte2, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Reporte 2: Palabras", jPanel2);
-
-        lblReporte3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblReporte3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte3, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte3, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Reporte 3: Fichas", jPanel3);
-
-        lblReporte4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblReporte4.setToolTipText("");
-        lblReporte4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte4, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte4, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Reporte 4: Mano", jPanel4);
-
-        lblReporte5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblReporte5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte5, javax.swing.GroupLayout.DEFAULT_SIZE, 352, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lblReporte5, javax.swing.GroupLayout.DEFAULT_SIZE, 372, Short.MAX_VALUE)
-        );
-
-        jTabbedPane1.addTab("Reporte 5: Tablero", jPanel5);
-
-        btnValidarTiro.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnValidarTiro.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnValidarTiro.setText("VALIDAR TIRO");
         btnValidarTiro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -283,7 +197,7 @@ public class JFTablero extends javax.swing.JFrame {
             }
         });
 
-        btnPedirFichas.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        btnPedirFichas.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         btnPedirFichas.setText("PEDIR MAS FICHAS");
         btnPedirFichas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -291,12 +205,32 @@ public class JFTablero extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+        jTabbedPane1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jTabbedPane1StateChanged(evt);
             }
         });
+
+        lblRPalabras.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jScrollPane1.setViewportView(lblRPalabras);
+
+        jTabbedPane1.addTab("Lista Palabras", jScrollPane1);
+
+        lblRJugadores.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jScrollPane2.setViewportView(lblRJugadores);
+
+        jTabbedPane1.addTab("Lista Jugadores", jScrollPane2);
+
+        lblRFichas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblRFichas.setToolTipText("");
+        jScrollPane3.setViewportView(lblRFichas);
+
+        jTabbedPane1.addTab("Cola Fichas", jScrollPane3);
+
+        lblRMano.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jScrollPane4.setViewportView(lblRMano);
+
+        jTabbedPane1.addTab("Lista Mano", jScrollPane4);
 
         jMenu1.setText("Ayuda");
 
@@ -313,78 +247,67 @@ public class JFTablero extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(281, Short.MAX_VALUE)
+                .addContainerGap(213, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txtPalabraNueva, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)))
-                        .addGap(20, 20, 20))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(btnValidarTiro)
-                                    .addComponent(btnPedirFichas))
-                                .addGap(4, 4, 4)))
-                        .addGap(42, 42, 42)))
+                    .addComponent(btnValidarTiro, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel1)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(txtPalabraNueva, javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING))
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnPedirFichas))
+                .addGap(59, 59, 59)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(btnMostrarReportes)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(21, 21, 21)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel1)
+                    .addComponent(btnMostrarReportes, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTabbedPane1)
-                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGap(30, 30, 30)
                         .addComponent(jLabel2)
-                        .addGap(55, 55, 55)
+                        .addGap(9, 9, 9)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtPalabraNueva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnAgregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                         .addComponent(btnValidarTiro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnPedirFichas)
-                        .addGap(22, 22, 22))))
+                        .addComponent(btnPedirFichas))
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jTabbedPane1)))
+                .addGap(32, 32, 32))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnMostrarReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarReportesActionPerformed
         // TODO add your handling code here:
+        lcj.Graficar();
+        cfichas.Graficar();
+        lsmano.Graficar();
+        lsp.Graficar();
         matriz.graficarMatriz();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnMostrarReportesActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         // TODO add your handling code here:
         lsp.insertarFinal(txtPalabraNueva.getText());
         txtPalabraNueva.setText("");
         lsp.Mostrar();
-        //lsp.Graficar();
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnValidarTiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnValidarTiroActionPerformed
@@ -397,50 +320,80 @@ public class JFTablero extends javax.swing.JFrame {
         this.masFichasJugador();
     }//GEN-LAST:event_btnPedirFichasActionPerformed
 
-    private void jTabbedPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTabbedPane1MouseClicked
-        // TODO add your handling code here:
-        /* 
-        
-        ImageIcon dos = new ImageIcon(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "LSPalabras.png");
-        this.lblReporte2.setIcon(dos);
-        
-        ImageIcon tres = new ImageIcon(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "CFichas.png");
-        this.lblReporte3.setIcon(tres);
-        
-        ImageIcon cuatro = new ImageIcon(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "LSMano.png");
-        this.lblReporte4.setIcon(cuatro);
-        
-        ImageIcon cinco = new ImageIcon(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "MTablero.png");
-        this.lblReporte5.setIcon(cinco);*/
-    }//GEN-LAST:event_jTabbedPane1MouseClicked
-
     private void jTabbedPane1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jTabbedPane1StateChanged
         // TODO add your handling code here:
-        System.out.println(this.jTabbedPane1.getSelectedIndex() + "--");
-        int pestaña = 0;
-        switch (pestaña) {
-            case 0:
-                lcj.Graficar();
-                ImageIcon uno = new ImageIcon(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "LCJugadores.png");
-                JLabel fondo = new JLabel();
-                jPanelReporte1.removeAll();
-                jPanelReporte1.revalidate();
-                jPanelReporte1.repaint();
-                fondo.setIcon(uno);
-                fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
-                jPanelReporte1.add(fondo);
-                jPanelReporte1.revalidate();
-                jPanelReporte1.repaint();
-                break;
-        }
+        mostrarReportes();
     }//GEN-LAST:event_jTabbedPane1StateChanged
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        jPanelReporte1.removeAll();
-        jPanelReporte1.revalidate();
-        jPanelReporte1.repaint();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    public void mostrarReportes() {
+        System.out.println(this.jTabbedPane1.getSelectedIndex() + "--");
+        int pestaña = this.jTabbedPane1.getSelectedIndex();
+
+        /**
+         * velocidad en segundos *
+         */
+        int velocidad = 5;
+
+        /**
+         * velocidad en milisegundos *
+         */
+        int velMili = velocidad * 1000;
+
+        Timer timer;
+        TimerTask tarea;
+
+        tarea = new TimerTask() {
+            @Override
+            public void run() {
+
+                switch (pestaña) {
+                    case 0:
+                        lsp.Graficar();
+                         {
+                            try {
+                                lblRPalabras.setIcon(new ImageIcon(ImageIO.read(new File(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "LSPalabras.png"))));
+                            } catch (IOException ex) {
+                                Logger.getLogger(JFTablero.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+                    case 1:
+                        lcj.Graficar();
+                         {
+                            try {
+                                lblRJugadores.setIcon(new ImageIcon(ImageIO.read(new File(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "LCJugadores.png"))));
+                            } catch (IOException ex) {
+                                Logger.getLogger(JFTablero.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+                    case 2:
+                        cfichas.Graficar();
+                         {
+                            try {
+                                lblRFichas.setIcon(new ImageIcon(ImageIO.read(new File(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "CFichas.png"))));
+                            } catch (IOException ex) {
+                                Logger.getLogger(JFTablero.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+                    case 3:
+                        lsmano.Graficar();
+                         {
+                            try {
+                                lblRMano.setIcon(new ImageIcon(ImageIO.read(new File(System.getProperty("user.home") + File.separator + "SalidasDot" + File.separator + "LSMano.png"))));
+                            } catch (IOException ex) {
+                                Logger.getLogger(JFTablero.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+                        break;
+                }
+            }
+        };
+
+        timer = new Timer();
+        timer.scheduleAtFixedRate(tarea, velMili, velMili);
+    }
 
     /**
      * @param args the command line arguments
@@ -479,26 +432,24 @@ public class JFTablero extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
+    private javax.swing.JButton btnMostrarReportes;
     private javax.swing.JButton btnPedirFichas;
     private javax.swing.JButton btnValidarTiro;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanelReporte1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JLabel lblReporte2;
-    private javax.swing.JLabel lblReporte3;
-    private javax.swing.JLabel lblReporte4;
-    private javax.swing.JLabel lblReporte5;
+    private javax.swing.JLabel lblRFichas;
+    private javax.swing.JLabel lblRJugadores;
+    private javax.swing.JLabel lblRMano;
+    private javax.swing.JLabel lblRPalabras;
     private javax.swing.JTextField txtPalabraNueva;
     // End of variables declaration//GEN-END:variables
 }

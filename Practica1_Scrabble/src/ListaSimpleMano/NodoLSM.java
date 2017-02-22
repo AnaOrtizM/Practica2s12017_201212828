@@ -5,6 +5,8 @@
  */
 package ListaSimpleMano;
 
+import MatrizTablero.Ficha;
+
 /**
  *
  * @author ana_j
@@ -12,9 +14,9 @@ package ListaSimpleMano;
 public class NodoLSM {
 
     private NodoLSM siguiente;
-    private String fichaM;
+    private Ficha fichaM;
 
-    public NodoLSM(String fichaM, NodoLSM siguiente) {
+    public NodoLSM(Ficha fichaM, NodoLSM siguiente) {
         this.siguiente = siguiente;
         this.fichaM = fichaM;
     }
@@ -23,7 +25,7 @@ public class NodoLSM {
         this.siguiente = siguiente;
     }
 
-    public void setFichaM(String fichaM) {
+    public void setFichaM(Ficha fichaM) {
         this.fichaM = fichaM;
     }
 
@@ -31,7 +33,7 @@ public class NodoLSM {
         return siguiente;
     }
 
-    public String getFichaM() {
+    public Ficha getFichaM() {
         return fichaM;
     }
 }

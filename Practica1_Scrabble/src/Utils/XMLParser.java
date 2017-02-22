@@ -32,8 +32,8 @@ public class XMLParser extends DefaultHandler {
     int tipoY = 0;
     public static int dimension;
     
-    public LSPalabras lsp = JFMenuPrincipal.lsp;
-    public MTablero mt = JFTablero.mt;
+    public static LSPalabras lsp = JFMenuPrincipal.lsp;
+    public MTablero mt = JFTablero.matriz;
 
     public XMLParser() {
         super();
@@ -101,7 +101,7 @@ public class XMLParser extends DefaultHandler {
             System.out.println("--- " + new String(ch, start, length));
             String dim = new String(ch, start, length).trim();
             dimension = Integer.parseInt(dim);
-            JFTablero.mt = new MTablero(dimension, dimension);
+            JFTablero.matriz = new MTablero(dimension, dimension);
             bdimension = false;
         }
 
@@ -115,7 +115,7 @@ public class XMLParser extends DefaultHandler {
                 System.out.println("--- " + new String(ch, start, length));
                 String y = new String(ch, start, length).trim();
                 tipoY = Integer.parseInt(y);
-                NodoMT nodo = JFTablero.mt.get(tipoX-1, tipoY-1);
+                NodoMT nodo = JFTablero.matriz.get(tipoX-1, tipoY-1);
                 nodo.setTipo(1);
                 by = false;
             }
@@ -131,7 +131,7 @@ public class XMLParser extends DefaultHandler {
                 System.out.println("--- " + new String(ch, start, length));
                 String y = new String(ch, start, length).trim();
                 tipoY = Integer.parseInt(y);
-                NodoMT nodo = JFTablero.mt.get(tipoX-1, tipoY-1);
+                NodoMT nodo = JFTablero.matriz.get(tipoX-1, tipoY-1);
                 nodo.setTipo(2);
                 by = false;
             }

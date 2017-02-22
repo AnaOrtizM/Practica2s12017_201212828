@@ -16,14 +16,16 @@ import javax.swing.border.LineBorder;
  */
 public class Ficha {
 
-    public static final Integer TAM_FICHA = 30;
+    public static final Integer TAM_FICHA = 35;
 
     String letra;
     MiJLabel labelFicha;
+    int puntos;
 
-    Ficha(String letra, int posx, int posy) {
+    public Ficha(String letra, int puntos, int posx, int posy) {
         this.letra = letra;
-        this.labelFicha = new MiJLabel(letra);
+        this.puntos = puntos;
+        this.labelFicha = new MiJLabel(letra, posx, posy);
         this.labelFicha.setBounds(posx * TAM_FICHA, posy * TAM_FICHA, TAM_FICHA, TAM_FICHA);
         this.labelFicha.setFont(new Font("Tahoma", 1, 10)); // NOI18N
         this.labelFicha.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

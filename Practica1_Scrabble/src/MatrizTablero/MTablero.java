@@ -15,8 +15,8 @@ import javax.swing.JPanel;
 public class MTablero {
 
     private NodoMT raiz;
-    private int x;
-    private int y;
+    public int x;
+    public int y;
 
     Graficador g = new Graficador();
 
@@ -151,7 +151,7 @@ public class MTablero {
         }
 
         for (int j = 0; j < y; j++) {
-            for (int i = 0; i < (x-1); i++) {
+            for (int i = 0; i < (x - 1); i++) {
                 grafo += "\"" + i + "," + j + "\" -> \"" + (i + 1) + "," + j + "\"[constraint=false];\n";
                 grafo += "\"" + (i + 1) + "," + j + "\" -> \"" + i + "," + j + "\"[constraint=false];\n";
                 grafo += "{rank=same;\"" + i + "," + j + "\" \"" + (i + 1) + "," + j + "\"}\n";
@@ -160,12 +160,12 @@ public class MTablero {
         }
 
         for (int i = 0; i < y; i++) {
-            for (int j = 0; j < (x-1); j++) {
+            for (int j = 0; j < (x - 1); j++) {
                 grafo += "\"" + i + "," + j + "\" -> \"" + i + "," + (j + 1) + "\"[rankdir=UD];\n";
                 grafo += "\"" + i + "," + (j + 1) + "\" -> \"" + i + "," + j + "\"[rankdir=UD];\n";
             }
         }
-        
+
         grafo += "labelloc=\"t\"; label=\" MATRIZ ORTOGONAL TABLERO\";}";
         System.out.println(grafo);
 
@@ -271,8 +271,9 @@ public class MTablero {
             temp = raiz.abajo;
             int i = 0;
             int j = 0;
+            String c = null;
             while (temp != null) {
-                grafo += "\"" + i + j + "\" [label = \"" + x + y + "\"];\n";
+                grafo += "\"" + i + j + c + "\" [label = \"" + x + y + temp.getContenido() + "\"];\n";
                 if (temp.abajo != null) {
                     grafo += "\"" + i + "\" -> \"" + (i + 1) + "\" ;\n";
                 }

@@ -5,7 +5,7 @@
  */
 package MatrizTablero;
 
-import static MatrizTablero.Ficha.TAM_FICHA;
+//import static MatrizTablero.Ficha.TAM_FICHA;
 import java.awt.Color;
 import java.awt.Font;
 import javax.swing.JLabel;
@@ -38,7 +38,7 @@ public class NodoMT {
         this.posicionX = posx;
         this.posicionY = posy;
         this.lbl = new JLabel("");
-        this.lbl.setBounds(posx * TAM_FICHA, posy * TAM_FICHA, TAM_FICHA, TAM_FICHA);
+        this.lbl.setBounds(posx * Ficha.TAM_FICHA, posy * Ficha.TAM_FICHA, Ficha.TAM_FICHA, Ficha.TAM_FICHA);
         this.lbl.setFont(new Font("Tahoma", 1, 10)); // NOI18N
         this.lbl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Border outsideBorder = new LineBorder(Color.gray);
@@ -51,14 +51,22 @@ public class NodoMT {
 
     public void setFicha(Ficha ficha) {
         this.ficha = ficha;
+        this.ficha.getLabelFicha().setBackground(Color.blue);
+        this.ficha.getLabelFicha().setForeground(Color.white);
+        this.ficha.getLabelFicha().setOpaque(true);
+        this.ficha.getLabelFicha().repaint();
     }
 
     public void setTipo(int tipo) {
         this.tipo = tipo;
         if (tipo == 1) {
             this.lbl.setBackground(Color.red);
+            this.lbl.setOpaque(true);
+            this.lbl.repaint();
         } else if (tipo == 2) {
             this.lbl.setBackground(Color.blue);
+            this.lbl.setOpaque(true);
+            this.lbl.repaint();
         }
     }
 
