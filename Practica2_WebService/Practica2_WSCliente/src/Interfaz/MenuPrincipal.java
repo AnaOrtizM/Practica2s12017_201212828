@@ -5,6 +5,7 @@
  */
 package Interfaz;
 
+import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -28,7 +29,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     //************* FIN VARIABLES GLOBALES
     public MenuPrincipal() {
         initComponents();
-
+        
         /**
          * ******** Colocar una imagen de fondo *********
          */

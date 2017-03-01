@@ -5,6 +5,11 @@
  */
 package Interfaz;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author ana_j
@@ -16,6 +21,16 @@ public class MenuLista extends javax.swing.JFrame {
      */
     public MenuLista() {
         initComponents();
+        
+        /**
+         * ******** Colocar una imagen de fondo *********
+         */
+        ((JPanel) getContentPane()).setOpaque(false);
+        ImageIcon uno = new ImageIcon(this.getClass().getResource("/Imagenes/lista.jpg"));
+        JLabel fondo = new JLabel();
+        fondo.setIcon(uno);
+        getLayeredPane().add(fondo, JLayeredPane.FRAME_CONTENT_LAYER);
+        fondo.setBounds(0, 0, uno.getIconWidth(), uno.getIconHeight());
     }
 
     /**
