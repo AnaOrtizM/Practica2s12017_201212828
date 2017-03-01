@@ -19,6 +19,13 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
+    //************* VARIABLES GLOBALES
+    MenuCola mcola = new MenuCola();
+    MenuLista mlista = new MenuLista();
+    MenuPila mpila = new MenuPila();
+    MenuMatriz mmatriz = new MenuMatriz();
+
+    //************* FIN VARIABLES GLOBALES
     public MenuPrincipal() {
         initComponents();
 
@@ -53,18 +60,38 @@ public class MenuPrincipal extends javax.swing.JFrame {
         btnCola.setBackground(new java.awt.Color(255, 153, 153));
         btnCola.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnCola.setText("COLA");
+        btnCola.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnColaActionPerformed(evt);
+            }
+        });
 
         btnLista.setBackground(new java.awt.Color(255, 204, 153));
         btnLista.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnLista.setText("LISTA SIMPLE");
+        btnLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnListaActionPerformed(evt);
+            }
+        });
 
         btnMatriz.setBackground(new java.awt.Color(153, 255, 153));
         btnMatriz.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnMatriz.setText("MATRIZ DISPERSA");
+        btnMatriz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMatrizActionPerformed(evt);
+            }
+        });
 
         btnPila.setBackground(new java.awt.Color(153, 204, 255));
         btnPila.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         btnPila.setText("PILA");
+        btnPila.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPilaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,31 +99,54 @@ public class MenuPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(113, 113, 113)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(btnLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnCola, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnPila, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(104, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnLista, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCola, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnMatriz, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnPila, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(112, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(53, 53, 53)
+                .addGap(47, 47, 47)
                 .addComponent(btnCola)
-                .addGap(58, 58, 58)
-                .addComponent(btnLista)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addComponent(btnMatriz)
                 .addGap(55, 55, 55)
+                .addComponent(btnLista)
+                .addGap(54, 54, 54)
+                .addComponent(btnMatriz)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(btnPila)
-                .addGap(53, 53, 53))
+                .addGap(48, 48, 48))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnColaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnColaActionPerformed
+        // TODO add your handling code here:
+        mcola.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnColaActionPerformed
+
+    private void btnPilaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPilaActionPerformed
+        // TODO add your handling code here:
+        mpila.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnPilaActionPerformed
+
+    private void btnListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnListaActionPerformed
+        // TODO add your handling code here:
+        mlista.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnListaActionPerformed
+
+    private void btnMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMatrizActionPerformed
+        // TODO add your handling code here:
+        mmatriz.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_btnMatrizActionPerformed
 
     /**
      * @param args the command line arguments
