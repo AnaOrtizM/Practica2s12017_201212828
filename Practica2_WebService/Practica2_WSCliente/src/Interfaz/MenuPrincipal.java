@@ -5,7 +5,6 @@
  */
 package Interfaz;
 
-import java.net.URL;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;

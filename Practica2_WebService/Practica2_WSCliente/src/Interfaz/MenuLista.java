@@ -5,6 +5,10 @@
  */
 package Interfaz;
 
+import Utils.TestWebServer;
+import static Utils.TestWebServer.getString;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.RequestBody;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
@@ -19,9 +23,11 @@ public class MenuLista extends javax.swing.JFrame {
     /**
      * Creates new form MenuLista
      */
+    TestWebServer server = new TestWebServer();
+
     public MenuLista() {
         initComponents();
-        
+
         /**
          * ******** Colocar una imagen de fondo *********
          */
@@ -47,15 +53,16 @@ public class MenuLista extends javax.swing.JFrame {
         btnBack = new javax.swing.JButton();
         txtPalabraLista = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAgregarLista = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txtIndiceLista = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnEliminarLista = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         txtPalabraBuscar = new javax.swing.JTextField();
-        btnBuscar = new javax.swing.JButton();
+        btnBuscarLista = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTextPane2 = new javax.swing.JTextPane();
+        txtSalidaLista = new javax.swing.JTextPane();
+        btnGraficarLista = new javax.swing.JButton();
 
         jScrollPane1.setViewportView(jTextPane1);
 
@@ -76,8 +83,13 @@ public class MenuLista extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("INGRESE NUEVA PALABRA");
 
-        jButton1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton1.setText("AGREGAR");
+        btnAgregarLista.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnAgregarLista.setText("AGREGAR");
+        btnAgregarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarListaActionPerformed(evt);
+            }
+        });
 
         jLabel2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(0, 0, 153));
@@ -85,8 +97,13 @@ public class MenuLista extends javax.swing.JFrame {
 
         txtIndiceLista.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        jButton2.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        jButton2.setText("ELIMINAR");
+        btnEliminarLista.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnEliminarLista.setText("ELIMINAR");
+        btnEliminarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarListaActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(0, 0, 153));
@@ -95,13 +112,25 @@ public class MenuLista extends javax.swing.JFrame {
 
         txtPalabraBuscar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
 
-        btnBuscar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        btnBuscar.setText("BUSCAR");
+        btnBuscarLista.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        btnBuscarLista.setText("BUSCAR");
+        btnBuscarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarListaActionPerformed(evt);
+            }
+        });
 
-        jTextPane2.setBackground(new java.awt.Color(0, 0, 0));
-        jTextPane2.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jTextPane2.setForeground(new java.awt.Color(0, 51, 153));
-        jScrollPane2.setViewportView(jTextPane2);
+        txtSalidaLista.setBackground(new java.awt.Color(0, 0, 0));
+        txtSalidaLista.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        txtSalidaLista.setForeground(new java.awt.Color(0, 51, 153));
+        jScrollPane2.setViewportView(txtSalidaLista);
+
+        btnGraficarLista.setText("GRAFICAR");
+        btnGraficarLista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGraficarListaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -110,13 +139,15 @@ public class MenuLista extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(365, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnGraficarLista)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(34, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(txtPalabraBuscar, javax.swing.GroupLayout.Alignment.TRAILING)
@@ -127,34 +158,36 @@ public class MenuLista extends javax.swing.JFrame {
                     .addComponent(txtPalabraLista, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAgregarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEliminarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscarLista, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnBack)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnBack)
+                    .addComponent(btnGraficarLista))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPalabraLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(btnAgregarLista))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtIndiceLista, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(btnEliminarLista))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPalabraBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscar))
+                    .addComponent(btnBuscarLista))
                 .addGap(37, 37, 37)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)
                 .addContainerGap())
@@ -170,6 +203,52 @@ public class MenuLista extends javax.swing.JFrame {
         menu.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
+
+    private void btnAgregarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarListaActionPerformed
+        // TODO add your handling code here:
+        String palabra = txtPalabraLista.getText();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("palabra", palabra)
+                .build();
+        String r = getString("insertarLista", formBody);
+        System.out.println(r);
+        txtSalidaLista.setText(r);
+        this.txtPalabraLista.setText("");
+    }//GEN-LAST:event_btnAgregarListaActionPerformed
+
+    private void btnEliminarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarListaActionPerformed
+        // TODO add your handling code here:
+        String indice = txtIndiceLista.getText();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("indice", indice)
+                .build();
+        String r = getString("eliminarLista", formBody);
+        System.out.println(r);
+        txtSalidaLista.setText(r);
+        this.txtIndiceLista.setText("");
+    }//GEN-LAST:event_btnEliminarListaActionPerformed
+
+    private void btnBuscarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarListaActionPerformed
+        // TODO add your handling code here:
+        String palabra = txtPalabraBuscar.getText();
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("palabra", palabra)
+                .build();
+        String r = getString("buscarLista", formBody);
+        System.out.println(r);
+        txtSalidaLista.setText(r);
+    }//GEN-LAST:event_btnBuscarListaActionPerformed
+
+    private void btnGraficarListaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarListaActionPerformed
+        // TODO add your handling code here:
+        String palabra = "";
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("palabra", palabra)
+                .build();
+        String r = getString("graficarLista", formBody);
+        System.out.println(r);
+        txtSalidaLista.setText(r);
+    }//GEN-LAST:event_btnGraficarListaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -207,19 +286,20 @@ public class MenuLista extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarLista;
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnBuscarLista;
+    private javax.swing.JButton btnEliminarLista;
+    private javax.swing.JButton btnGraficarLista;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextPane jTextPane1;
-    private javax.swing.JTextPane jTextPane2;
     private javax.swing.JTextField txtIndiceLista;
     private javax.swing.JTextField txtPalabraBuscar;
     private javax.swing.JTextField txtPalabraLista;
+    private javax.swing.JTextPane txtSalidaLista;
     // End of variables declaration//GEN-END:variables
 }
