@@ -1,0 +1,9 @@
+// Lista Simple
+digraph "Lista Simple" {
+	graph [rankdir=UD]
+	node [shape=box]
+		0 [label=fgf]
+		1 [label=kljljl]
+			0 -> 1 [constraint=false]
+		1 [label=kljljl]
+}

@@ -223,7 +223,7 @@ public class MenuMatriz extends javax.swing.JFrame {
         String r = getString("insertarMatriz", formBody);
         System.out.println(r);
         txtSalidaMatriz.setText(r);
-        this.txtInsertarCorreo.setText("");
+       // this.txtInsertarCorreo.setText("");
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnGraficarMatrizActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraficarMatrizActionPerformed

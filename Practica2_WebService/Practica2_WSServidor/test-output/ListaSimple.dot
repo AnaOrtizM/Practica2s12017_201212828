@@ -1,0 +1,13 @@
+// Lista Simple
+digraph {
+	0 [label=ghyh]
+	1 [label=fdsfs]
+		0 -> 1 [constraint=false]
+	1 [label=fdsfs]
+	2 [label=fdsfsere]
+		1 -> 2 [constraint=false]
+	2 [label=fdsfsere]
+	3 [label=fdsfsereuuuj]
+		2 -> 3 [constraint=false]
+	3 [label=fdsfsereuuuj]
+}

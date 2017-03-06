@@ -1,0 +1,6 @@
+// Pila
+digraph Pila {
+	graph [rankdir=UD]
+	node [shape=doublecircle]
+		1 [label="Pila Vacia"]
+}

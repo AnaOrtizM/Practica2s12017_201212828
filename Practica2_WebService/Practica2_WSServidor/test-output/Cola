@@ -1,0 +1,6 @@
+// Cola
+digraph Cola {
+	graph [rankdir=UD]
+	node [shape=circle]
+		1 [label=4]
+}
