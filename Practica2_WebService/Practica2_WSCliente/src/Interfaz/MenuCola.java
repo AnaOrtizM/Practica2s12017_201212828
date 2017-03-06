@@ -24,6 +24,7 @@ public class MenuCola extends javax.swing.JFrame {
      * Creates new form MenuCola
      */
     TestWebServer server = new TestWebServer();
+
     public MenuCola() {
         initComponents();
 
@@ -114,6 +115,9 @@ public class MenuCola extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        btnGraficarCola.setBackground(new java.awt.Color(153, 255, 153));
+        btnGraficarCola.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnGraficarCola.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/graph2.png"))); // NOI18N
         btnGraficarCola.setText("GRAFICAR");
         btnGraficarCola.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -189,13 +193,14 @@ public class MenuCola extends javax.swing.JFrame {
 
     private void btnQueueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQueueActionPerformed
         // TODO add your handling code here:
-        String palabra =  txtNumCola.getText();
+        String palabra = txtNumCola.getText();
         RequestBody formBody = new FormEncodingBuilder()
                 .add("dato", palabra)
                 .build();
         String r = getString("queueCola", formBody);
         System.out.println(r);
         txtSalidaCola.setText(r);
+        this.txtNumCola.setText("");
     }//GEN-LAST:event_btnQueueActionPerformed
 
     private void btnDequeueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDequeueActionPerformed

@@ -125,6 +125,9 @@ public class MenuLista extends javax.swing.JFrame {
         txtSalidaLista.setForeground(new java.awt.Color(0, 51, 153));
         jScrollPane2.setViewportView(txtSalidaLista);
 
+        btnGraficarLista.setBackground(new java.awt.Color(153, 255, 153));
+        btnGraficarLista.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        btnGraficarLista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/graph2.png"))); // NOI18N
         btnGraficarLista.setText("GRAFICAR");
         btnGraficarLista.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
